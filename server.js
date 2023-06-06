@@ -1,34 +1,27 @@
+import "dotenv/config";
 import express from "express";
-import KafkaConfig from "./KafkaConfig.js";
-
-const TOPIC = "test-01";
-const kafkaConfig = new KafkaConfig();
+import cors from "cors";
+import kafkaRoutes from "./routes/kafka.routes.js";
+import elasticRoutes from "./routes/elastic.routes.js";
+import earthquakeRoutes from "./routes/earthquake.routes.js";
 
 const PORT = 3000;
 const app = express();
 
-app.get("/api/kafka", async (req, res) => {
-  try {
-    const messages = [
-      {
-        key: "key-1",
-        value: "This is a message to kafka!",
-      },
-    ];
+app.use("/api/elastic", elasticRoutes);
+app.use("api/earthquakes", earthquakeRoutes);
+app.use("/api/kafka", kafkaRoutes);
 
-    await kafkaConfig.produce(TOPIC, messages);
-    res.status(200).json({
-      status: "OK",
-      message: "Message successfully send!",
-    });
-  } catch (error) {
-    console.log("***There is an error writing to kafka: ", error);
-  }
+app.use(cors());
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("The app is working!");
 });
 
-// * Consumer
-kafkaConfig.consume(TOPIC, (value) => {
-  console.log(value);
+app.use((err, req, res, next) => {
+  console.log("***HIJACKING THE EXPRESS DEFAULT ERROR HANDLER***");
+  next(err);
 });
 
 app.listen(PORT, () => {

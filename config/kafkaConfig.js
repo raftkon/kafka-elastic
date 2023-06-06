@@ -1,5 +1,5 @@
 import { Kafka } from "kafkajs";
-export default class KafkaConfig {
+class KafkaConfig {
   constructor() {
     this.kafka = new Kafka({
       clientId: "kafka01",
@@ -29,7 +29,6 @@ export default class KafkaConfig {
       await this.consumer.subscribe({ topics: [topic], fromBeginning: true });
       await this.consumer.run({
         eachMessage: async ({ topic, partition, message }) => {
-          // const value = message.value.toString();
           callback(message.value.toString());
         },
       });
@@ -40,6 +39,7 @@ export default class KafkaConfig {
   }
 }
 
+export default new KafkaConfig();
 // const { Kafka } = require("kafkajs");
 
 // const kafka = new Kafka({

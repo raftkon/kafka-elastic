@@ -1,0 +1,61 @@
+@INDEX=api/earthquakes 
+@PORT=3000
+
+### Start the app
+GET http://localhost:{{PORT}}/ HTTP/1.1
+Content-Type: application/json
+### get mapping
+GET http://localhost:{{PORT}}/{{INDEX}}/mapping HTTP/1.1
+Content-Type: application/json
+### Bulk documents
+GET http://localhost:{{PORT}}/{{INDEX}}/bulk HTTP/1.1
+Content-Type: application/json
+### Get DOCUMENTS
+GET http://localhost:{{PORT}}/{{INDEX}} HTTP/1.1
+Content-Type: application/json
+### Get DOCUMENT BY ID
+GET http://localhost:{{PORT}}/{{INDEX}}/q-aYR4gBtRooss79IeO2 HTTP/1.1
+Content-Type: application/json
+### Do a custom query
+GET  http://localhost:{{PORT}}/{{INDEX}}/query
+### Create Document
+POST http://localhost:{{PORT}}/{{INDEX}} HTTP/1.1
+Content-Type: application/json
+### Delete ALL DOCUMENTS
+DELETE  http://localhost:{{PORT}}/{{INDEX}} HTTP/1.1
+Content-Type: application/json
+### Delete DOCUMENT BY ID
+DELETE  http://localhost:{{PORT}}/{{INDEX}}/nwvPD4gBED93krrbTCqU HTTP/1.1
+Content-Type: application/json
+### Change field from document
+PUT http://localhost:{{PORT}}/{{INDEX}}/Qq0hD4gBZE5dIgzYrgyC HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "pame oloi mazi se mia paraliaa!"
+}
+
+###
+GET http://localhost:{{PORT}}/{{INDEX}}/aggs/metric/max HTTP/1.1
+Content-Type: application/json
+###
+GET http://localhost:{{PORT}}/{{INDEX}}/aggs/metric/all HTTP/1.1
+Content-Type: application/json
+###
+GET http://localhost:{{PORT}}/{{INDEX}}/aggs/metric/cardinality HTTP/1.1
+Content-Type: application/json
+###
+GET http://localhost:{{PORT}}/{{INDEX}}/aggs/bucket/date HTTP/1.1
+Content-Type: application/json
+###
+GET http://localhost:{{PORT}}/{{INDEX}}/aggs/bucket/hist HTTP/1.1
+Content-Type: application/json
+###
+GET http://localhost:{{PORT}}/{{INDEX}}/aggs/bucket/range HTTP/1.1
+Content-Type: application/json
+###
+GET http://localhost:{{PORT}}/{{INDEX}}/aggs/bucket/terms HTTP/1.1
+Content-Type: application/json
+###
+GET http://localhost:{{PORT}}/{{INDEX}}/aggs/pipeline HTTP/1.1
+Content-Type: application/json
