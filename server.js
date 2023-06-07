@@ -4,12 +4,13 @@ import cors from "cors";
 import kafkaRoutes from "./routes/kafka.routes.js";
 import elasticRoutes from "./routes/elastic.routes.js";
 import earthquakeRoutes from "./routes/earthquake.routes.js";
+import bodyParser from "body-parser";
 
 const PORT = 3000;
 const app = express();
 
 app.use("/api/elastic", elasticRoutes);
-app.use("api/earthquakes", earthquakeRoutes);
+app.use("/api/earthquakes", earthquakeRoutes);
 app.use("/api/kafka", kafkaRoutes);
 
 app.use(cors());

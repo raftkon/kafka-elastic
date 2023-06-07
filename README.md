@@ -25,8 +25,16 @@ docker run --name kibana-01 --net elastic -p 5601:5601 docker.elastic.co/kibana/
 
 ## Kafka & Zookeeper
 
-Start Kafka & Zookeeper containers by running the following command:
+Start Kafka & Zookeeper containers by running the following command in the root directory:
 
 ```bash
 docker-compose up -d
+```
+
+## ExpressJS
+
+After running the appropriate containers, run the command:
+
+```bash
+npm start
 ```

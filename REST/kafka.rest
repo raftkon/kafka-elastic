@@ -1,0 +1,23 @@
+post http://localhost:3000/api/kafka HTTP/1.1
+Content-Type: application/json
+
+{
+  "data":[
+    {
+  "key": "{{$guid}}",
+  "value": "Gianni"
+    },
+    {
+  "key": "{{$guid}}",
+  "value": "mitso!"
+    },
+    {
+  "key": "{{$guid}}",
+  "value": "lurri?"
+    }   
+  ]
+}
+###
+
+post http://localhost:3000/test HTTP/1.1
+Content-Type: application/json

@@ -3,7 +3,6 @@ import catchAsync from "../lib/catchAsync.js";
 import earthquakeControllers from "../controllers/earthquake.controllers.js";
 
 const router = express.Router();
-// const earthquakeControllers = require("../controllers/earthquake.controllers");
 
 router.get("/", catchAsync(earthquakeControllers.getAllDocs));
 
@@ -21,26 +20,38 @@ router.delete("/", catchAsync(earthquakeControllers.removeAllDocs));
 
 router.delete("/:id", catchAsync(earthquakeControllers.removeDocById));
 
-router.get("/aggs/metric/max", catchAsync(earthquakeControllers.getMax));
+router.get("/aggs/metric/max", catchAsync(earthquakeControllers.getMaxAggs));
 
-router.get("/aggs/metric/stats", catchAsync(earthquakeControllers.getStats));
+router.get(
+  "/aggs/metric/stats",
+  catchAsync(earthquakeControllers.getStatsAggs)
+);
 
 router.get(
   "/aggs/metric/cardinality",
-  catchAsync(earthquakeControllers.getCardinality)
+  catchAsync(earthquakeControllers.getCardinalityAggs)
 );
 
 router.get(
   "/aggs/bucket/date",
-  catchAsync(earthquakeControllers.getDateHistogram)
+  catchAsync(earthquakeControllers.getDateHistogramAggs)
 );
 
-router.get("/aggs/bucket/hist", catchAsync(earthquakeControllers.getHistogram));
+router.get(
+  "/aggs/bucket/hist",
+  catchAsync(earthquakeControllers.getHistogramAggs)
+);
 
-router.get("/aggs/bucket/range", catchAsync(earthquakeControllers.getRange));
+router.get(
+  "/aggs/bucket/range",
+  catchAsync(earthquakeControllers.getRangeAggs)
+);
 
-router.get("/aggs/bucket/terms", catchAsync(earthquakeControllers.getTerms));
+router.get(
+  "/aggs/bucket/terms",
+  catchAsync(earthquakeControllers.getTermsAggs)
+);
 
-router.get("/aggs/pipeline", catchAsync(earthquakeControllers.getPipeline));
+router.get("/aggs/pipeline", catchAsync(earthquakeControllers.getPipelineAggs));
 
 export default router;

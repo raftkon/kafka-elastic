@@ -14,7 +14,7 @@ Content-Type: application/json
 GET http://localhost:{{PORT}}/{{INDEX}} HTTP/1.1
 Content-Type: application/json
 ### Get DOCUMENT BY ID
-GET http://localhost:{{PORT}}/{{INDEX}}/q-aYR4gBtRooss79IeO2 HTTP/1.1
+GET http://localhost:{{PORT}}/{{INDEX}}/RjbylIgBNt6Y851FsQZJ HTTP/1.1
 Content-Type: application/json
 ### Do a custom query
 GET  http://localhost:{{PORT}}/{{INDEX}}/query
@@ -39,7 +39,7 @@ Content-Type: application/json
 GET http://localhost:{{PORT}}/{{INDEX}}/aggs/metric/max HTTP/1.1
 Content-Type: application/json
 ###
-GET http://localhost:{{PORT}}/{{INDEX}}/aggs/metric/all HTTP/1.1
+GET http://localhost:{{PORT}}/{{INDEX}}/aggs/metric/stats HTTP/1.1
 Content-Type: application/json
 ###
 GET http://localhost:{{PORT}}/{{INDEX}}/aggs/metric/cardinality HTTP/1.1

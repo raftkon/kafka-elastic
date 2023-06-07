@@ -37,6 +37,7 @@ async function getIngestPipeline(req, res) {
   const result = await elasticClient.ingest.getPipeline({
     id: earthquakeModel.pipeline.id,
   });
+  console.log("RESULT:: ", result);
   res.send(result);
 }
 

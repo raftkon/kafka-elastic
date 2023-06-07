@@ -10,6 +10,7 @@ async function getAllDocs(req, res) {
   });
   res.json(result);
 }
+
 async function getDocById(req, res) {
   const result = await elasticClient.search({
     index: earthquakeModel.name,
@@ -21,15 +22,17 @@ async function getDocById(req, res) {
   });
   res.json(result);
 }
+
 async function getMapping(req, res) {
   await elasticClient.indices.refresh({
-    index: indexName,
+    index: earthquakeModel.name,
   });
   const result = await elasticClient.indices.getMapping({
-    index: indexName,
+    index: earthquakeModel.name,
   });
   res.send(result);
 }
+
 async function createDoc(req, res) {
   const result = await elasticClient.index({
     index: earthquakeModel.name,
@@ -43,28 +46,27 @@ async function createDoc(req, res) {
       latitude: 23,
       longitude: -23,
     },
-    pipeline: earthquakeModel.pipeline,
+    pipeline: earthquakeModel.pipeline.id,
   });
   await elasticClient.indices.refresh();
   res.send(result);
 }
+
 async function bulkDocuments(req, res) {
-  const data = await helperFunctions
-    .readJSON("./data.json")
-    .then((data) => helperFunctions.transformEarthquakeData(data));
-  const operations = data.flatMap((doc) => [
-    { index: { _index: earthquakeModel.name } },
-    doc,
-  ]);
+  const data = helperFunctions.readJSON("./data.json");
+  const operations = helperFunctions
+    .transformEarthquakeData(data)
+    .flatMap((doc) => [{ index: { _index: earthquakeModel.name } }, doc]);
   const result = await elasticClient.bulk({
     refresh: true,
     operations,
-    pipeline: earthquakeModel.pipeline,
+    pipeline: earthquakeModel.pipeline.id,
   });
   const count = await elasticClient.count({ index: earthquakeModel.name });
   console.log(count);
   res.send(result);
 }
+
 async function updateDoc(req, res) {
   const { id } = req.params;
   const result = await elasticClient.update({
@@ -77,6 +79,7 @@ async function updateDoc(req, res) {
   console.log(result);
   res.json(result);
 }
+
 async function removeAllDocs(req, res) {
   const result = await elasticClient.deleteByQuery({
     index: earthquakeModel.name,
@@ -86,6 +89,7 @@ async function removeAllDocs(req, res) {
   });
   res.json(result);
 }
+
 async function removeDocById(req, res) {
   const { id } = req.params;
   const result = await elasticClient.delete({
@@ -112,6 +116,7 @@ async function getMaxAggs(req, res) {
   console.log(result);
   res.json(result);
 }
+
 async function getStatsAggs(req, res) {
   const result = await elasticClient.search({
     index: earthquakeModel.name,
@@ -127,6 +132,7 @@ async function getStatsAggs(req, res) {
   console.log(result);
   res.json(result);
 }
+
 async function getCardinalityAggs(req, res) {
   const result = await elasticClient.search({
     index: earthquakeModel.name,
@@ -142,6 +148,7 @@ async function getCardinalityAggs(req, res) {
   console.log(result);
   res.json(result);
 }
+
 async function getDateHistogramAggs(req, res) {
   const result = await elasticClient.search({
     index: earthquakeModel.name,
@@ -149,7 +156,7 @@ async function getDateHistogramAggs(req, res) {
     aggs: {
       earthquakes_per_day: {
         date_histogram: {
-          field: "time",
+          field: "@timestamp",
           fixed_interval: "1d",
           order: {
             _key: "desc",
@@ -161,6 +168,7 @@ async function getDateHistogramAggs(req, res) {
   console.log(result);
   res.json(result);
 }
+
 async function getHistogramAggs(req, res) {
   const result = await elasticClient.search({
     index: earthquakeModel.name,
@@ -177,6 +185,7 @@ async function getHistogramAggs(req, res) {
   console.log(result);
   res.json(result);
 }
+
 async function getRangeAggs(req, res) {
   const result = await elasticClient.search({
     index: earthquakeModel.name,
@@ -204,6 +213,7 @@ async function getRangeAggs(req, res) {
   console.log(result);
   res.json(result);
 }
+
 async function getTermsAggs(req, res) {
   const result = await elasticClient.search({
     index: earthquakeModel.name,
@@ -220,6 +230,7 @@ async function getTermsAggs(req, res) {
   console.log(result);
   res.json(result);
 }
+
 async function getPipelineAggs(req, res) {
   const result = await elasticClient.search({
     index: earthquakeModel.name,
@@ -259,6 +270,7 @@ export default {
   getDateHistogramAggs,
   getHistogramAggs,
   getHistogramAggs,
+  getRangeAggs,
   getTermsAggs,
   getPipelineAggs,
 };

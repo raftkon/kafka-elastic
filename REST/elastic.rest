@@ -10,14 +10,14 @@ Content-Type: application/json
 DELETE http://localhost:3000/api/elastic?index=earthquakes HTTP/1.1
 Content-Type: application/json
 
-###
+### Get Ingest Pipeline
 GET http://localhost:3000/api/elastic/ingestPipeline HTTP/1.1
 Content-Type: application/json
 
-###
+### Create Ingest Pipeline
 POST http://localhost:3000/api/elastic/ingestPipeline HTTP/1.1
 Content-Type: application/json
 
-###
+### Delete Ingest Pipeline
 DELETE http://localhost:3000/api/elastic/ingestPipeline?pipelineID=murder-case-pipeline HTTP/1.1
 Content-Type: application/json
