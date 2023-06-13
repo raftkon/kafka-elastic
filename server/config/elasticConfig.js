@@ -1,6 +1,5 @@
 import { Client } from "@elastic/elasticsearch";
 
-console.log(process.env.ELASTICSEARCH_HOST);
 const client = new Client({
   node: process.env.ELASTICSEARCH_HOST,
   auth: {

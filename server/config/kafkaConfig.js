@@ -2,8 +2,8 @@ import { Kafka } from "kafkajs";
 class KafkaConfig {
   constructor() {
     this.kafka = new Kafka({
-      clientId: "kafka01",
-      brokers: ["localhost:9092"],
+      clientId: process.env.KAFKA_CLIENT_ID,
+      brokers: [process.env.KAFKA_BROKER_1],
     });
     this.producer = this.kafka.producer();
     this.consumer = this.kafka.consumer({ groupId: "test-group" });
@@ -32,7 +32,6 @@ class KafkaConfig {
           callback(message.value.toString());
         },
       });
-      await this.consumer.seek({ topic, offset: 0, partition: 0 });
     } catch (error) {
       console.log(error);
     }
