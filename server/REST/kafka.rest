@@ -5,7 +5,7 @@ Content-Type: application/json
   "data":[
     {
   "key": "{{$guid}}",
-  "value": "Gianni"
+  "value": "re spuroooo"
     },
     {
   "key": "{{$guid}}",

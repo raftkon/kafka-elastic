@@ -3,7 +3,7 @@ class KafkaConfig {
   constructor() {
     this.kafka = new Kafka({
       clientId: process.env.KAFKA_CLIENT_ID,
-      brokers: [process.env.KAFKA_BROKER_1],
+      brokers: [process.env.KAFKA_BROKER],
     });
     this.producer = this.kafka.producer();
     this.consumer = this.kafka.consumer({ groupId: "test-group" });
