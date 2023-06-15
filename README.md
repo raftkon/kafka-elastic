@@ -12,7 +12,7 @@ docker network create kafka-elastic
 
 ## Run containers
 
-The docker-compose.yml file in the root directory containes all the necessary containers. Run the command:
+The `docker-compose.yml` file in the root directory containes all the necessary containers. Run the command:
 
 ```bash
 docker compose -p kafka-elastic up -d
@@ -58,7 +58,7 @@ After entering the verification code it should prompt you to enter usename and p
 
 Every container now should run properly, so the next step is to configure the expressJS server so that it can communicate with Elasticsearch and Kafka containers.
 
-Create a **.env** file and enter the following parameters:
+Create a `.env` file and enter the following parameters:
 
 ```
 
@@ -71,11 +71,11 @@ KAFKA_BROKER="kafka:9092"
 
 ```
 
-Provide the password generated in the `ELASTICSEARCH_PASSWORD` parameter. In `ELASTICSEARCH_HOST` the url should match to the name of the container, e.g. if you name the container _es-01_, the parameter should be `https://es-01:9200`. In our case, in the `docker-compose.yml` file, we named the container _elasticsearch_ and the port we expose is _9200_. Similarly, the `KAFKA_BROKER` parameter should have the name of the container and the port specified in the docker-compose.yml. The `KAFKA_CLIENT_ID` can be whatever you want.
+Provide the password generated in the `ELASTICSEARCH_PASSWORD` parameter. In `ELASTICSEARCH_HOST` the url should match to the name of the container, e.g. if you name the container _es-01_, the parameter should be `https://es-01:9200`. In our case, in the `docker-compose.yml` file, we named the container _elasticsearch_ and the port we expose is _9200_. Similarly, the `KAFKA_BROKER` parameter should have the name of the container and the port specified in the `docker-compose.yml`. The `KAFKA_CLIENT_ID` can be whatever you want.
 
 ### Build docker image
 
-In order to build the docker image, navigate to the server directory where the _Dockerfile_ lives and run the command:
+In order to build the docker image, navigate to the server directory where the `Dockerfile` lives and run the command:
 
 ```bash
 docker build -t express --no-cache .
