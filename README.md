@@ -22,20 +22,20 @@ docker compose -p kafka-elastic up -d
 
 The first time you run the Elasticsearch container, a password is generated for the _elastic_ user and output to the logs, plus an enrollment token for enrolling Kibana.
 
-**In case there are no password and enrollment token**, we have to generate them manually. The default user in elasticsearch is **elastic**.
+**In case there are no password and enrollment token**, we have to generate them manually. The default user in elasticsearch is _elastic_.
 
-We need the **password** so we can connect from Express server and from Kibana. To generate a new password run the command:
+We need the _password_ so we can connect from Express server and from Kibana. To generate a new password run the command:
 
 ```bash
- docker exec -it elasticsearch bin/elasticsearch-reset-password -u elastic
+docker exec -it elasticsearch bin/elasticsearch-reset-password -u elastic
 ```
 
 If you encounter a problem about not finding the script, replace _bin/elasticsearch-reset-password_ with _/usr/share/elasticsearch/bin/elasticsearch-reset-password_ which is the full path of the script.
 
-To generate a new **enrollment token** in order to enroll to Kibana, run the command:
+To generate a new _enrollment token_ in order to enroll to Kibana, run the command:
 
 ```bash
- docker exec -it elasticsearch bin/elasticsearch-create-enrollment-token -s kibana
+docker exec -it elasticsearch bin/elasticsearch-create-enrollment-token -s kibana
 ```
 
 Save the password and the enrollment token to a file.
@@ -47,7 +47,7 @@ The first time you run the Kibana container you have to enroll to Kibana. You ha
 After that an alert will popup asking for a verification code from Kibana. To generate the verification code run the command:
 
 ```bash
- docker exec -it kibana bin/kibana-verification-code
+docker exec -it kibana bin/kibana-verification-code
 ```
 
 If you encounter a problem about not finding the script, replace _bin/kibana-verification-code_ with _/usr/share/elasticsearch/bin/elasticsearch-create-enrollment-token_ which is the full path of the script.
@@ -60,20 +60,18 @@ Every container now should run properly, so the next step is to configure the ex
 
 Create a **.env** file and enter the following parameters:
 
----
+```
 
-**NOTE**
-
-ELASTICSEARCH*USERNAME="elastic"
-ELASTICSEARCH_PASSWORD=\_password generated*
+ELASTICSEARCH_USERNAME="elastic"
+ELASTICSEARCH_PASSWORD="password generated"
 ELASTICSEARCH_HOST="https://elasticsearch:9200"
 
 KAFKA_CLIENT_ID="kafka01"
 KAFKA_BROKER="kafka:9092"
 
----
+```
 
-Provide the password generated in the ELASTICSEARCH*PASSWORD parameter. In ELASTICSEARCH_HOST the url should match to the name of the container, e.g. if you name the container \_es-01*, the parameter should be _"https://es-01:9200"_. In our case, in the docker-compose.yml file, we named the container _elasticsearch_ and the port we expose is _9200_. Similarly, the KAFKA_BROKER parameter should have the name of the container and the port specified in the docker-compose.yml. The KAFKA_CLIENT_ID can be whatever you want.
+Provide the password generated in the `ELASTICSEARCH_PASSWORD` parameter. In `ELASTICSEARCH_HOST` the url should match to the name of the container, e.g. if you name the container _es-01_, the parameter should be `https://es-01:9200`. In our case, in the `docker-compose.yml` file, we named the container _elasticsearch_ and the port we expose is _9200_. Similarly, the `KAFKA_BROKER` parameter should have the name of the container and the port specified in the docker-compose.yml. The `KAFKA_CLIENT_ID` can be whatever you want.
 
 ### Build docker image
 
