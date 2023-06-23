@@ -93,7 +93,9 @@ docker run -p 3000:3000 --name express --net kafka-elastic express
 
 ### Test
 
-To test if the whole setup is working, navigate inside the `/server` folder to the the `/REST` folder. Inside you will find 3 different files with many endpoints for you to hit and test if Elasticsearch or Kafka really works. You will have to install `REST Client` in VSCode.
+To test if the whole setup is working, navigate inside `/server` to find`/REST`. Inside you will find 3 different files with many endpoints for you to hit and test if Elasticsearch or Kafka really works. You will have to install `REST Client` in VSCode to test the endpoints.
+
+In addition, there is `data.json` inside `/server` with earthquake data retrieved from _https://earthquake.usgs.gov/fdsnws/event/1/_. You can try, firstly, to create an index and an ingest pipeline inside `elastic.rest` and then try to bulk documents, retrieve them, etc, inside `earthquake.rest`.
 
 ## Last notes
 

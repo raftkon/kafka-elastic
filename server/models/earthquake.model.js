@@ -24,6 +24,20 @@ export default {
           ignore_missing: true,
         },
       },
+      {
+        rename: {
+          field: "latitude",
+          target_field: "coordinates.lat",
+          ignore_missing: true,
+        },
+      },
+      {
+        rename: {
+          field: "longitude",
+          target_field: "coordinates.lon",
+          ignore_missing: true,
+        },
+      },
     ],
   },
 };
