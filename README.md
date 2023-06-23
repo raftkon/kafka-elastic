@@ -63,7 +63,7 @@ Create a `.env` file and enter the following parameters:
 ```
 
 ELASTICSEARCH_USERNAME="elastic"
-ELASTICSEARCH_PASSWORD="password generated"
+ELASTICSEARCH_PASSWORD="password_generated"
 ELASTICSEARCH_HOST="https://elasticsearch:9200"
 
 KAFKA_CLIENT_ID="kafka01"
@@ -90,6 +90,10 @@ Now that we have the docker image, we run the container by running the command:
 ```bash
 docker run -p 3000:3000 --name express --net kafka-elastic express
 ```
+
+### Test
+
+To test if the whole setup is working, navigate inside the `/server` folder to the the `/REST` folder. Inside you will find 3 different files with many endpoints for you to hit and test if Elasticsearch or Kafka really works. You will have to install `REST Client` in VSCode.
 
 ## Last notes
 
