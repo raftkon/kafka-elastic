@@ -19,7 +19,7 @@ services:
     ports:
       - ${KAFKA_PORT}:${KAFKA_PORT}
     expose:
-      - "9092"
+      - ${KAFKA_PORT}
     environment:
       - ALLOW_PLAINTEXT_LISTENER=${ALLOW_PLAINTEXT_LISTENER}
       - KAFKA_ENABLE_KRAFT=${KAFKA_ENABLE_KRAFT}
